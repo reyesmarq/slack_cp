@@ -12,6 +12,6 @@ let server = new ApolloServer({
 let app = express()
 app.use(express.json())
 server.applyMiddleware({ app })
-models.sequelize.sync().then(() => {
+models.sequelize.sync({ force: true }).then(() => {
     app.listen(8080, () => console.log('Slack running'))
 })

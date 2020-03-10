@@ -5,7 +5,10 @@ let sequelize = new Sequelize(
     'postgres',
     'reyes859',
     {
-        dialect: 'postgres'
+        dialect: 'postgres',
+        define: {
+            underscored: true
+        }
     }
 )
 let models = {
