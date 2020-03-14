@@ -1,17 +1,21 @@
 import express from 'express'
 import { ApolloServer } from "apollo-server-express"
-import typeDefs from './schema'
-import resolvers from './resolvers'
 import models from "./models"
+import path from 'path'
+import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas'
+
+let typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')))
+let resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')))
 
 let server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: { models }
 })
 
 let app = express()
 app.use(express.json())
 server.applyMiddleware({ app })
-models.sequelize.sync({ force: true }).then(() => {
+models.sequelize.sync().then(() => {
     app.listen(8080, () => console.log('Slack running'))
 })
