@@ -5,6 +5,8 @@ import path from 'path'
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas'
 import cors from 'cors'
 
+let dbFlush = false
+
 let typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')))
 let resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')))
 
@@ -18,6 +20,6 @@ let app = express()
 app.use(cors('*'))
 app.use(express.json())
 server.applyMiddleware({ app })
-models.sequelize.sync().then(() => {
+models.sequelize.sync({ force: dbFlush }).then(() => {
     app.listen(8080, () => console.log('Slack running'))
 })
