@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Input, Container, Header } from 'semantic-ui-react';
+import { gql, graphql } from 'react-apollo';
 
 class Login extends React.Component {
     state = {
@@ -7,11 +8,19 @@ class Login extends React.Component {
         password: '',
     };
 
-    onSubmit = () => {
+    onSubmit = async () => {
         const { email, password } = this.state
 
-        console.log(email)
-        console.log(password)
+        const response = await this.props.mutate({
+            variables: { email, password }
+        })
+
+        const { ok, token, refreshToken } = response.data.login
+
+        if (ok) {
+            localStorage.setItem('token', token)
+            localStorage.setItem('refreshToken', refreshToken)
+        }
     }
 
     onChange = e => {
@@ -47,4 +56,18 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+const loginMutation = gql`
+    mutation($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            ok
+            token
+            refreshToken
+            errors {
+                path
+                message
+            }
+        }
+    }
+`
+
+export default graphql(loginMutation)(Login)

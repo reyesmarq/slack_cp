@@ -6,6 +6,8 @@ import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas'
 import cors from 'cors'
 
 let dbFlush = false
+let SECRET = 'thisIsSuperSecret'
+let SECRET2 = 'thisIsSuperSecret2'
 
 let typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')))
 let resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')))
@@ -13,7 +15,7 @@ let resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')))
 let server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: { models }
+    context: { models, SECRET, SECRET2 }
 })
 
 let app = express()

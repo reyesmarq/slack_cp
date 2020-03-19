@@ -5,6 +5,7 @@ let sequelize = new Sequelize(
     'postgres',
     'reyes859',
     {
+        logging: false,
         dialect: 'postgres',
         define: {
             underscored: true
