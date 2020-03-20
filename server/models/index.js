@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize('slack', 'postgres', 'reyes859', {
-  dialect: 'postgres',
   logging: false,
+  dialect: 'postgres',
   define: {
     underscored: true,
   },
