@@ -1,11 +1,11 @@
 export default `
-    type Team {
-        owner: User!
-        members: [User!]!
-        channel: [Channel!]!
-    }
+  type Team {
+    owner: User!
+    members: [User!]!
+    channels: [Channel!]!
+  }
 
-    type Mutation {
-        createTeam(name: String!): Boolean!
-    }
-`
+  type Mutation {
+    createTeam(name: String!): Boolean!
+  }
+`;
