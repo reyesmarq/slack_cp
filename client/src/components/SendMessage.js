@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
-import { Input } from 'semantic-ui-react'
+import { Input } from 'semantic-ui-react';
 
 const SendMessageWrapper = styled.div`
   grid-column: 3;
@@ -8,11 +8,8 @@ const SendMessageWrapper = styled.div`
   margin: 20px;
 `;
 
-
-const SendMessage = ({ channelName }) => (
-    <SendMessageWrapper>
-        <Input fluid placeholder={`Message #${channelName}`} />
-    </SendMessageWrapper>
-)
-
-export default SendMessage
+export default ({ channelName }) => (
+  <SendMessageWrapper>
+    <Input fluid placeholder={`Message #${channelName}`} />
+  </SendMessageWrapper>
+);
