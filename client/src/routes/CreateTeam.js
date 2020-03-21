@@ -16,15 +16,15 @@ class CreateTeam extends React.Component {
 
   onSubmit = async () => {
     const { name } = this;
-    let response = null
+    let response = null;
 
     try {
       response = await this.props.mutate({
         variables: { name },
       });
     } catch (err) {
-      this.props.history.push('/login')
-      return
+      this.props.history.push('/login');
+      return;
     }
 
     console.log(response);
