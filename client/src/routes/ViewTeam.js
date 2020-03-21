@@ -4,22 +4,31 @@ import Channels from '../components/Channels';
 import Teams from '../components/Teams';
 import Header from '../components/Header';
 import Messages from '../components/Messages';
-import Input from '../components/Input';
+import SendMessage from '../components/SendMessage';
 import AppLayout from '../components/AppLayout';
 
 export default () => (
-  <AppLayout>
-    <Teams>Teams</Teams>
-    <Channels>Channels</Channels>
-    <Header>Header</Header>
-    <Messages>
-      <ul className="message-list">
-        <li />
-        <li />
-      </ul>
-    </Messages>
-    <Input>
-      <input type="text" placeholder="CSS Grid Layout Module" />
-    </Input>
-  </AppLayout>
+    <AppLayout>
+        <Teams
+            teams={[{ id: 1, letter: 'M' }, { id: 2, letter: 'B' }]}
+        />
+        <Channels
+            teamName="Norcodi"
+            username="Mreyes"
+            channels={[{ id: 1, name: 'general' }, { id: 2, name: 'random' }]}
+            users={[{ id: 1, name: 'slackbot' }, { id: 2, name: 'user 1' }]}
+        />
+        <Header
+            channelName="general"
+        />
+        <Messages>
+            <ul className="message-list">
+                <li />
+                <li />
+            </ul>
+        </Messages>
+        <SendMessage
+            channelName="general"
+        />
+    </AppLayout>
 );
