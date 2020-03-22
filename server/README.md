@@ -1,3 +1,3 @@
 # slack-clone-server
 
-[Watch the video to learn how it was made.](https://youtu.be/uDfFkuvhnxs)
+[Watch the video to learn how it was made.](https://youtu.be/Mj4xJAVs2VQ)
