@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import _ from 'lodash';
+import { findIndex } from 'lodash';
 import decode from 'jwt-decode';
 
 import Channels from '../components/Channels';
@@ -13,11 +13,8 @@ const Sidebar = ({ data: { loading, allTeams }, currentTeamId }) => {
   }
 
   
-  const teamIdx = _.findIndex(allTeams, ['id', currentTeamId]);
-  console.log('currentteamid', currentTeamId)
-  console.log('teamindex', teamIdx)
+  const teamIdx = currentTeamId ? findIndex(allTeams, ['id', parseInt(currentTeamId, 10)]) : 0;
   const team = allTeams[teamIdx];
-  console.log('team', team)
   let username = '';
   try {
     const token = localStorage.getItem('token');
