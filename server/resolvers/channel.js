@@ -1,4 +1,4 @@
-import formatErrors from "../formatErrors";
+import formatErrors from '../formatErrors';
 
 export default {
   Mutation: {
@@ -7,13 +7,13 @@ export default {
         const channel = await models.Channel.create(args);
         return {
           ok: true,
-          channel
+          channel,
         };
       } catch (err) {
         console.log(err);
         return {
           ok: false,
-          errors: formatErrors(err)
+          errors: formatErrors(err),
         };
       }
     },

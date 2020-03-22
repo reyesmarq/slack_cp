@@ -16,32 +16,32 @@ const AddChannelModal = ({
   handleSubmit,
   isSubmitting,
 }) => (
-    <Modal open={open} onClose={onClose}>
-      <Modal.Header>Add Channel</Modal.Header>
-      <Modal.Content>
-        <Form>
-          <Form.Field>
-            <Input
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              name="name"
-              fluid
-              placeholder="Channel name"
-            />
-          </Form.Field>
-          <Form.Group widths="equal">
-            <Button disabled={isSubmitting} fluid onClick={onClose}>
-              Cancel
+  <Modal open={open} onClose={onClose}>
+    <Modal.Header>Add Channel</Modal.Header>
+    <Modal.Content>
+      <Form>
+        <Form.Field>
+          <Input
+            value={values.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="name"
+            fluid
+            placeholder="Channel name"
+          />
+        </Form.Field>
+        <Form.Group widths="equal">
+          <Button disabled={isSubmitting} fluid onClick={onClose}>
+            Cancel
           </Button>
-            <Button disabled={isSubmitting} onClick={handleSubmit} fluid>
-              Create Channel
+          <Button disabled={isSubmitting} onClick={handleSubmit} fluid>
+            Create Channel
           </Button>
-          </Form.Group>
-        </Form>
-      </Modal.Content>
-    </Modal>
-  );
+        </Form.Group>
+      </Form>
+    </Modal.Content>
+  </Modal>
+);
 
 const createChannelMutation = gql`
   mutation($teamId: Int!, $name: String!) {
