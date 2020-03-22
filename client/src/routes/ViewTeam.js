@@ -8,7 +8,6 @@ import Sidebar from '../containers/Sidebar';
 
 const ViewTeam = ({ match: { params } }) => (
   <AppLayout>
-    {console.log(params)}
     <Sidebar currentTeamId={params.teamId} />
     <Header channelName="general" />
     <Messages>
@@ -21,4 +20,4 @@ const ViewTeam = ({ match: { params } }) => (
   </AppLayout>
 );
 
-export default ViewTeam
+export default ViewTeam;

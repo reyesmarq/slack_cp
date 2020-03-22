@@ -1,3 +1,3 @@
 # slack-clone-client
 
-[Watch the video to learn how it was made.](https://youtu.be/gfRzLg0cpro)
+[Watch the video to learn how it was made.](https://youtu.be/anwo_i0wgNo)
