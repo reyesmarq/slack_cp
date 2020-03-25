@@ -1,4 +1,5 @@
 import express from 'express'
+import http from 'http'
 import { ApolloServer } from "apollo-server-express"
 import models from "./models"
 import { refreshTokens } from './auth'
@@ -6,6 +7,7 @@ import path from 'path'
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas'
 import cors from 'cors'
 
+let port = 8081
 let dbFlush = false
 let SECRET = 'thisIsSuperSecret'
 let SECRET2 = 'thisIsSuperSecret2'
@@ -43,16 +45,18 @@ app.use(addUser);
 let server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: {
-  //   models,
-  //   user: req.user,
-  //   SECRET,
-  //   SECRET2
-  // },
-  context: ({req, res}) => ({...req, ...res, models, user: req.user, SECRET, SECRET2})
+  context: ({req, res}) => ({...req, ...res, models, user: req.user, SECRET, SECRET2}),
+  subscriptions: {
+    path: '/subscriptions'
+  }
 })
 
 server.applyMiddleware({ app })
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
 models.sequelize.sync({ force: dbFlush }).then(() => {
-  app.listen(8081, () => console.log('Slack running'))
+  httpServer.listen(port, () => {
+    console.log(`> Server ready at http://localhost:${port}${server.graphqlPath}`);
+    console.log(`> Subscriptions ready at ws://localhost:${port}${server.subscriptionsPath}`);
+  })
 })
