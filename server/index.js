@@ -45,7 +45,13 @@ app.use(addUser);
 let server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({req, res}) => ({...req, ...res, models, user: req.user, SECRET, SECRET2}),
+  // context: ({req, connection}) => ({...req, ...res, models, user: req.user, SECRET, SECRET2}),
+  context: async ({ req, connection }) => ({
+    models,
+    user: connection ? connection.context : req.user,
+    SECRET,
+    SECRET2,
+  }),
   subscriptions: {
     path: '/subscriptions'
   }
