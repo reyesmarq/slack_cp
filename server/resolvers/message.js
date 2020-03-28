@@ -11,7 +11,16 @@ export default {
   Subscription: {
     newChannelMessage: {
       subscribe: withFilter(
-        () => pubsub.asyncIterator(NEW_CHANNEL_MESSAGE),
+        // but also going to stop them if they are not part of the team. 
+        (parent, { channelId }, { models, user }) => {
+          // check if part of the team
+          // const channel = await models.Channel.findOne({ where: { id: channelId } })
+          // const member = await models.Member.findOne({ where: { teamId: channel.teamId, userId: user.id } })
+          // if (!member) {
+          //   throw new Error('You have to be a member of the team to subscribe to its messages')
+          // }
+          return pubsub.asyncIterator(NEW_CHANNEL_MESSAGE)
+        },
         (payload, args) => payload.channelId === args.channelId
       )
     }
@@ -32,7 +41,7 @@ export default {
         });
 
         pubsub.publish(NEW_CHANNEL_MESSAGE, { channelId: args.channelId, newChannelMessage: message.dataValues })
-        
+
         return true;
       } catch (err) {
         console.log(err);
