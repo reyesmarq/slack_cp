@@ -1,9 +1,3 @@
-// CRUD
-// Create
-// Read
-// Update
-// Delete
-
 export default `
 
   type User {
@@ -16,6 +10,7 @@ export default `
   type Query {
     me: User!
     allUsers: [User!]!
+    getUser(userId: Int!): User
   }
 
   type RegisterResponse {
