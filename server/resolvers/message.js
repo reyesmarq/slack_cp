@@ -1,8 +1,7 @@
 import { PubSub, withFilter } from 'apollo-server-express'
 import requiresAuth from '../permissions';
 
-// if I need to use pubsub in a different resolvers, I would put this in a diffetent file and export it
-const pubsub = new PubSub();
+import pubsub from '../pubsub'
 
 // Event name
 const NEW_CHANNEL_MESSAGE = 'NEW_CHANNEL_MESSAGE'

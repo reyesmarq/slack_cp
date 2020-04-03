@@ -6,6 +6,11 @@ export default `
     receiverId: Int!
     createdAt: String!
   }
+
+  type Subscription {
+    newDirectMessage(teamId: Int!, userId: Int!): DirectMessage!
+  }
+
   type Query {
     directMessages(teamId: Int!, otherUserId: Int!): [DirectMessage!]!
   }
